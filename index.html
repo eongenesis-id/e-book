@@ -209,7 +209,7 @@
                 const upperBead = document.createElement('div');
                 upperBead.className = 'bead upper-bead';
                 upperBead.style.left = (position - 10) + 'px';
-                upperBead.style.top = '18%'; // Posisi awal atas lebih rendah (dari 15% ke 18%)
+                upperBead.style.top = '10%'; // Posisi awal atas lebih tinggi (dari 18% ke 10%)
                 upperBead.dataset.value = 5;
                 upperBead.dataset.position = 'upper';
                 upperBead.dataset.rod = i;
@@ -259,10 +259,10 @@
                 if (position === 'upper') {
                     // Untuk manik atas
                     if (bead.dataset.moved === 'false') {
-                        bead.style.top = '28%'; // Turun ke garis pembatas (dari 25% ke 28%)
+                        bead.style.top = '20%'; // Turun ke garis pembatas (dari 28% ke 20%)
                         bead.dataset.moved = 'true';
                     } else {
-                        bead.style.top = '18%'; // Kembali ke posisi semula
+                        bead.style.top = '10%'; // Kembali ke posisi semula
                         bead.dataset.moved = 'false';
                     }
                 } else {
@@ -313,7 +313,7 @@
                     const index = parseInt(bead.dataset.index || '0');
                     
                     if (position === 'upper') {
-                        bead.style.top = '18%';
+                        bead.style.top = '10%'; // Kembali ke posisi awal yang lebih tinggi
                         bead.dataset.moved = 'false';
                     } else {
                         bead.style.top = `${40 + index * 12}%`;
