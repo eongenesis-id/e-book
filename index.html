@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sempoa Mini Elegan</title>
+    <title>Sempoa Sederhana</title>
     <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, #f5e9d7, #e6d2b5);
+            background-color: #ffffff; /* Latar belakang putih bersih */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
             color: #5c3317;
@@ -18,147 +18,87 @@
             margin: 0;
         }
         
-        .download-container {
+        .sempoa-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: rgba(255, 250, 240, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(101, 67, 33, 0.5);
-            max-width: 560px;
+            background-color: #ffffff;
+            padding: 20px;
+            max-width: 500px;
             width: 100%;
-            border: 3px solid #8b5a2b;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: linear-gradient(to right, #8b5a2b, #c19a6b, #8b5a2b);
-            border-radius: 5px 5px 0 0;
         }
         
         .title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #5c3317;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             font-family: 'Georgia', serif;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #8b5a2b, transparent);
         }
         
         .sempoa-frame {
             position: relative;
             width: 400px;
-            height: 280px;
-            background: linear-gradient(to bottom, #f8f0e0, #e8d5b5);
-            border: 10px solid #8b5a2b;
-            border-radius: 15px;
+            height: 200px;
+            background: linear-gradient(to bottom, #f9f5f0, #f1e9de);
+            border: 12px solid #8b5a2b;
+            border-radius: 8px;
             box-shadow: 
-                inset 0 0 20px rgba(139, 69, 19, 0.4), 
-                0 8px 20px rgba(0, 0, 0, 0.3),
-                0 0 0 4px rgba(139, 69, 19, 0.2);
-            margin: 25px 0;
+                inset 0 0 10px rgba(139, 69, 19, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 15px 0;
             overflow: hidden;
         }
-        
-        .frame-decoration {
-            position: absolute;
-            width: 94%;
-            height: 92%;
-            top: 4%;
-            left: 3%;
-            border: 2px solid rgba(139, 69, 19, 0.3);
-            border-radius: 8px;
-            pointer-events: none;
-        }
-        
-        .corner-decoration {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #8b5a2b 40%, transparent 41%);
-            border-radius: 50%;
-        }
-        
-        .corner-top-left { top: -5px; left: -5px; }
-        .corner-top-right { top: -5px; right: -5px; }
-        .corner-bottom-left { bottom: -5px; left: -5px; }
-        .corner-bottom-right { bottom: -5px; right: -5px; }
         
         .horizontal-divider {
             position: absolute;
             width: 96%;
-            height: 5px;
+            height: 3px;
             background: linear-gradient(to right, #8b5a2b, #c19a6b, #8b5a2b);
             left: 2%;
             top: 25%;
             transform: translateY(-50%);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             border-radius: 2px;
         }
         
         .vertical-rod {
             position: absolute;
-            width: 6px;
+            width: 4px;
             height: 100%;
             background: linear-gradient(to bottom, #5c3317, #8b5a2b, #5c3317);
             top: 0;
             border-radius: 2px;
-            box-shadow: 
-                1px 0 4px rgba(0,0,0,0.3),
-                inset 1px 0 2px rgba(255, 255, 255, 0.2);
         }
         
         .bead {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            cursor: pointer;
             z-index: 2;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
         
         .bead:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 12px rgba(210, 105, 30, 0.9);
+            transform: scale(1.1);
         }
         
         .upper-bead {
             background: radial-gradient(circle at 30% 30%, #e6c9a0, #8b4513 70%);
             box-shadow: 
-                inset 3px 3px 6px rgba(255, 255, 255, 0.7),
-                inset -3px -3px 6px rgba(0, 0, 0, 0.6),
-                2px 2px 5px rgba(0,0,0,0.5);
+                inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.6),
+                1px 1px 3px rgba(0,0,0,0.4);
             border: 1px solid #5c3317;
         }
         
         .lower-bead {
             background: radial-gradient(circle at 30% 30%, #f8f0e0, #d9b382 70%);
             box-shadow: 
-                inset 3px 3px 6px rgba(255, 255, 255, 0.8),
-                inset -3px -3px 6px rgba(0, 0, 0, 0.5),
-                2px 2px 4px rgba(0,0,0,0.4);
+                inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.5),
+                1px 1px 3px rgba(0,0,0,0.3);
             border: 1px solid #8b5a2b;
         }
         
@@ -166,112 +106,74 @@
             display: flex;
             justify-content: space-around;
             width: 400px;
-            margin-top: 20px;
+            margin-top: 15px;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             color: #5c3317;
             text-align: center;
         }
         
         .rod-value {
             width: 70px;
-            padding: 8px;
+            padding: 5px;
             background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            border: 2px solid #8b5a2b;
+            border-radius: 5px;
+            border: 1px solid #8b5a2b;
             font-family: 'Georgia', serif;
         }
         
-        .buttons {
-            display: flex;
-            gap: 20px;
-            margin-top: 25px;
+        .instruction {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #5c3317;
+            max-width: 400px;
         }
         
-        .action-btn {
-            padding: 12px 24px;
+        .reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
             background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
             color: #5c3317;
             border: 2px solid #8b5a2b;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            box-shadow: 0 5px 12px rgba(139, 69, 19, 0.5);
-            transition: all 0.3s ease;
             font-family: 'Georgia', serif;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
         
-        .action-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(139, 69, 19, 0.6);
+        .reset-btn:hover {
             background: linear-gradient(to bottom, #f0e2ca, #d9b382);
-        }
-        
-        .action-btn:hover::before {
-            left: 100%;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
         }
         
         .notification {
             position: fixed;
-            top: 30px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(to right, #8b5a2b, #a67c52, #8b5a2b);
             color: #f8f0e0;
-            padding: 15px 30px;
-            border-radius: 8px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
             font-family: 'Georgia', serif;
         }
-        
-        .chinese-character {
-            position: absolute;
-            font-family: 'SimSun', serif;
-            color: rgba(139, 69, 19, 0.2);
-            font-size: 40px;
-            z-index: 0;
-        }
-        
-        .char-1 { top: 10%; left: 10%; }
-        .char-2 { top: 60%; right: 10%; }
     </style>
 </head>
 <body>
-    <div class="download-container">
-        <div class="title">Sempoa Mini Elegan</div>
+    <div class="sempoa-container">
+        <div class="title">Sempoa Sederhana</div>
         
         <div class="sempoa-frame" id="sempoa">
-            <!-- Dekorasi bingkai -->
-            <div class="frame-decoration"></div>
-            <div class="corner-decoration corner-top-left"></div>
-            <div class="corner-decoration corner-top-right"></div>
-            <div class="corner-decoration corner-bottom-left"></div>
-            <div class="corner-decoration corner-bottom-right"></div>
-            
-            <!-- Karakter Cina dekoratif -->
-            <div class="chinese-character char-1">算</div>
-            <div class="chinese-character char-2">盤</div>
-            
             <!-- Pembatas horizontal di tengah -->
             <div class="horizontal-divider"></div>
             
@@ -282,19 +184,22 @@
             <!-- Nilai untuk setiap tiang akan ditambahkan melalui JavaScript -->
         </div>
         
-        <div class="buttons">
-            <button class="action-btn" id="downloadBtn">Download Sempoa</button>
-            <button class="action-btn" id="resetBtn">Reset Sempoa</button>
+        <button class="reset-btn" id="resetBtn">Reset Sempoa</button>
+        
+        <div class="instruction">
+            Klik pada manik-manik untuk menggerakkannya. Manik atas bernilai 5, manik bawah bernilai 1.
         </div>
     </div>
 
-    <div class="notification" id="notification">Gambar sempoa berhasil didownload!</div>
+    <div class="notification" id="notification">Sempoa telah direset!</div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const sempoaContainer = document.getElementById('sempoa');
             const rodValuesContainer = document.getElementById('rodValues');
-            const rodCount = 5; // Jumlah batang pada sempoa (ditambah 1 untuk tampilan lebih mewah)
+            const resetBtn = document.getElementById('resetBtn');
+            const notification = document.getElementById('notification');
+            const rodCount = 5; // Jumlah batang pada sempoa
             const rodValues = [0, 0, 0, 0, 0]; // Nilai awal untuk setiap tiang
             
             // Buat tiang vertikal dan manik-manik untuk setiap batang
@@ -307,23 +212,22 @@
                 verticalRod.style.left = position + 'px';
                 sempoaContainer.appendChild(verticalRod);
                 
-                // Buat 1 manik atas (bernilai 5)
+                // Buat 1 manik atas (bernilai 5) - posisi lebih tinggi
                 const upperBead = document.createElement('div');
                 upperBead.className = 'bead upper-bead';
-                upperBead.style.left = (position - 12) + 'px';
-                upperBead.style.top = '10%'; // Posisi awal atas lebih tinggi
+                upperBead.style.left = (position - 10) + 'px';
+                upperBead.style.top = '10%'; // Posisi lebih tinggi
                 upperBead.dataset.value = 5;
                 upperBead.dataset.position = 'upper';
                 upperBead.dataset.rod = i;
                 upperBead.dataset.moved = 'false';
                 
-                // Buat 4 manik bawah (masing-masing bernilai 1)
+                // Buat 4 manik bawah (masing-masing bernilai 1) - posisi lebih rendah
                 for (let j = 0; j < 4; j++) {
                     const lowerBead = document.createElement('div');
                     lowerBead.className = 'bead lower-bead';
-                    lowerBead.style.left = (position - 12) + 'px';
-                    // Posisi awal bawah yang lebih rendah (diturunkan)
-                    lowerBead.style.top = `${40 + j * 12}%`; // Semua beads bawah diturunkan
+                    lowerBead.style.left = (position - 10) + 'px';
+                    lowerBead.style.top = `${40 + j * 12}%`; // Posisi lebih rendah
                     lowerBead.dataset.value = 1;
                     lowerBead.dataset.position = 'lower';
                     lowerBead.dataset.rod = i;
@@ -408,7 +312,7 @@
             }
             
             // Fungsi untuk reset sempoa
-            document.getElementById('resetBtn').addEventListener('click', function() {
+            resetBtn.addEventListener('click', function() {
                 const beads = document.querySelectorAll('.bead');
                 beads.forEach(bead => {
                     const position = bead.dataset.position;
@@ -418,7 +322,7 @@
                         bead.style.top = '10%'; // Kembali ke posisi awal yang lebih tinggi
                         bead.dataset.moved = 'false';
                     } else {
-                        bead.style.top = `${40 + index * 12}%`;
+                        bead.style.top = `${40 + index * 12}%`; // Kembali ke posisi awal yang lebih rendah
                         bead.dataset.moved = 'false';
                     }
                 });
@@ -427,79 +331,16 @@
                 showNotification('Sempoa telah direset!');
             });
             
-            // Fungsi untuk download sempoa sebagai gambar
-            document.getElementById('downloadBtn').addEventListener('click', function() {
-                // Buat container khusus untuk download
-                const downloadContainer = document.createElement('div');
-                downloadContainer.style.position = 'absolute';
-                downloadContainer.style.left = '-9999px';
-                document.body.appendChild(downloadContainer);
-                
-                // Buat elemen sempoa dan nilai untuk di-download
-                const sempoaClone = document.getElementById('sempoa').cloneNode(true);
-                const valuesClone = document.getElementById('rodValues').cloneNode(true);
-                
-                // Atur style untuk container download
-                downloadContainer.style.backgroundColor = '#f5e9d7';
-                downloadContainer.style.padding = '30px';
-                downloadContainer.style.borderRadius = '20px';
-                downloadContainer.style.border = '3px solid #8b5a2b';
-                downloadContainer.style.boxShadow = '0 12px 30px rgba(101, 67, 33, 0.5)';
-                downloadContainer.style.maxWidth = '560px';
-                downloadContainer.style.width = '100%';
-                
-                // Tambahkan judul untuk gambar yang akan di-download
-                const title = document.createElement('div');
-                title.textContent = 'Sempoa Mini Elegan';
-                title.style.fontSize = '28px';
-                title.style.fontWeight = 'bold';
-                title.style.marginBottom = '20px';
-                title.style.color = '#5c3317';
-                title.style.textAlign = 'center';
-                title.style.fontFamily = 'Georgia, serif';
-                
-                downloadContainer.appendChild(title);
-                downloadContainer.appendChild(sempoaClone);
-                downloadContainer.appendChild(valuesClone);
-                
-                // Menggunakan html2canvas untuk mengkonversi menjadi gambar
-                if (typeof html2canvas !== 'undefined') {
-                    html2canvas(downloadContainer, {
-                        backgroundColor: '#f5e9d7',
-                        scale: 3, // Kualitas lebih tinggi
-                        logging: false,
-                        useCORS: true
-                    }).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = 'sempoa-mini-elegan.png';
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                        
-                        // Hapus container setelah selesai
-                        document.body.removeChild(downloadContainer);
-                        
-                        // Tampilkan notifikasi
-                        showNotification('Gambar sempoa berhasil didownload!');
-                    });
-                } else {
-                    alert('Fitur download memerlukan library html2canvas. Silakan gunakan versi online untuk fitur ini.');
-                }
-            });
-            
             // Fungsi untuk menampilkan notifikasi
             function showNotification(message) {
-                const notification = document.getElementById('notification');
                 notification.textContent = message;
                 notification.style.opacity = 1;
                 
                 setTimeout(function() {
                     notification.style.opacity = 0;
-                }, 3000);
+                }, 2000);
             }
         });
     </script>
-    
-    <!-- Memuat library html2canvas dari CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
