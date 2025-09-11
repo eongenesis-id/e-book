@@ -1,84 +1,386 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sempoa Generator</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 2em; }
-    #abacus { display: flex; justify-content: center; margin-top: 2em; }
-    .rod { display: flex; flex-direction: column; align-items: center; margin: 0 5px; }
-    .bead { width: 30px; height: 30px; border-radius: 50%; margin: 4px 0; background: #d4a373; transition: transform 0.3s; }
-    .beam { width: 100%; height: 6px; background: #333; margin: 8px 0; }
-    button { margin-top: 1em; padding: 0.5em 1em; font-size: 16px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sempoa Mini untuk E-Book</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #f5e9d7, #e6d2b5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            color: #5c3317;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        .download-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 250, 240, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(101, 67, 33, 0.4);
+            max-width: 520px;
+            width: 100%;
+            border: 2px solid #8b5a2b;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #5c3317;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .sempoa-frame {
+            position: relative;
+            width: 340px;
+            height: 240px;
+            background: linear-gradient(to bottom, #f8f0e0, #f0e2ca);
+            border: 6px solid #8b5a2b;
+            border-radius: 12px;
+            box-shadow: inset 0 0 15px rgba(139, 69, 19, 0.3), 
+                        0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .horizontal-divider {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #8b5a2b, #c19a6b, #8b5a2b);
+            top: 25%; /* Garis pembatas pada 25% dari atas */
+            transform: translateY(-50%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .vertical-rod {
+            position: absolute;
+            width: 5px; /* Tiang lebih tebal */
+            height: 100%;
+            background: linear-gradient(to bottom, #5c3317, #8b5a2b, #5c3317);
+            top: 0;
+            border-radius: 1px;
+            box-shadow: 1px 0 3px rgba(0,0,0,0.3);
+        }
+        
+        .bead {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .bead:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 8px rgba(210, 105, 30, 0.8);
+        }
+        
+        .upper-bead {
+            background: radial-gradient(circle at 30% 30%, #e6c9a0, #8b4513);
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+                        inset -2px -2px 4px rgba(0, 0, 0, 0.5),
+                        2px 2px 4px rgba(0,0,0,0.4);
+            border: 1px solid #5c3317;
+        }
+        
+        .lower-bead {
+            background: radial-gradient(circle at 30% 30%, #f8f0e0, #d9b382);
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+                        inset -2px -2px 4px rgba(0, 0, 0, 0.4),
+                        2px 2px 3px rgba(0,0,0,0.3);
+            border: 1px solid #8b5a2b;
+        }
+        
+        .rod-values {
+            display: flex;
+            justify-content: space-around;
+            width: 340px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #5c3317;
+            text-align: center;
+        }
+        
+        .rod-value {
+            width: 60px;
+            padding: 5px;
+            background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid #8b5a2b;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            padding: 10px 18px;
+            background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
+            color: #5c3317;
+            border: 1px solid #8b5a2b;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(139, 69, 19, 0.5);
+            background: linear-gradient(to bottom, #f0e2ca, #d9b382);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(to right, #8b5a2b, #a67c52, #8b5a2b);
+            color: #f8f0e0;
+            padding: 12px 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <h1>Sempoa Digital Generator</h1>
-  <p>Masukkan angka untuk ditampilkan dalam bentuk sempoa klasik Cina</p>
-  <input type="number" id="inputNumber" placeholder="Masukkan angka..." />
-  <button onclick="renderAbacus()">Tampilkan</button>
-  <button onclick="downloadPDF()">Export PDF</button>
+    <div class="download-container">
+        <div class="title">Sempoa Mini Interaktif</div>
+        
+        <div class="sempoa-frame" id="sempoa">
+            <!-- Pembatas horizontal di tengah -->
+            <div class="horizontal-divider"></div>
+            
+            <!-- Tiang vertikal akan ditambahkan melalui JavaScript -->
+        </div>
+        
+        <div class="rod-values" id="rodValues">
+            <!-- Nilai untuk setiap tiang akan ditambahkan melalui JavaScript -->
+        </div>
+        
+        <div class="buttons">
+            <button class="action-btn" id="downloadBtn">Download Sempoa</button>
+            <button class="action-btn" id="resetBtn">Reset Sempoa</button>
+        </div>
+    </div>
 
-  <div id="abacus"></div>
-
-  <!-- html2canvas & jsPDF untuk PDF Export -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-  <script>
-    // Render angka ke dalam sempoa klasik Cina
-    function renderAbacus() {
-      const num = document.getElementById("inputNumber").value;
-      const abacus = document.getElementById("abacus");
-      abacus.innerHTML = "";
-
-      [...num].forEach(digit => {
-        const rod = document.createElement("div");
-        rod.className = "rod";
-
-        // 1 bead atas (nilai 5)
-        const topBead = document.createElement("div");
-        topBead.className = "bead";
-        // jika digit >= 5, bead atas ditarik ke bawah
-        if (digit >= 5) topBead.style.transform = "translateY(40px)";
-        rod.appendChild(topBead);
-
-        // beam
-        const beam = document.createElement("div");
-        beam.className = "beam";
-        rod.appendChild(beam);
-
-        // 4 bead bawah (nilai 1)
-        for (let i = 1; i <= 4; i++) {
-          const bead = document.createElement("div");
-          bead.className = "bead";
-          // jika digit mod 5 >= i, bead naik ke atas
-          if (digit % 5 >= i) bead.style.transform = "translateY(-40px)";
-          rod.appendChild(bead);
-        }
-
-        abacus.appendChild(rod);
-      });
-    }
-
-    // Export PDF
-    async function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const element = document.getElementById("abacus");
-
-      const canvas = await html2canvas(element);
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      const imgWidth = 180;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      let position = 20;
-
-      pdf.addImage(imgData, "PNG", 15, position, imgWidth, imgHeight);
-      pdf.save("sempoa.pdf");
-    }
-  </script>
+    <div class="notification" id="notification">Gambar sempoa berhasil didownload!</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sempoaContainer = document.getElementById('sempoa');
+            const rodValuesContainer = document.getElementById('rodValues');
+            const rodCount = 4; // Jumlah batang pada sempoa mini
+            const rodValues = [0, 0, 0, 0]; // Nilai awal untuk setiap tiang
+            
+            // Buat tiang vertikal dan manik-manik untuk setiap batang
+            for (let i = 0; i < rodCount; i++) {
+                const position = 60 + (i * 75); // Posisi horizontal untuk batang
+                
+                // Buat tiang vertikal
+                const verticalRod = document.createElement('div');
+                verticalRod.className = 'vertical-rod';
+                verticalRod.style.left = position + 'px';
+                sempoaContainer.appendChild(verticalRod);
+                
+                // Buat 1 manik atas (bernilai 5)
+                const upperBead = document.createElement('div');
+                upperBead.className = 'bead upper-bead';
+                upperBead.style.left = (position - 10) + 'px';
+                upperBead.style.top = '18%'; // Posisi awal atas lebih rendah (dari 15% ke 18%)
+                upperBead.dataset.value = 5;
+                upperBead.dataset.position = 'upper';
+                upperBead.dataset.rod = i;
+                upperBead.dataset.moved = 'false';
+                
+                // Buat 4 manik bawah (masing-masing bernilai 1)
+                for (let j = 0; j < 4; j++) {
+                    const lowerBead = document.createElement('div');
+                    lowerBead.className = 'bead lower-bead';
+                    lowerBead.style.left = (position - 10) + 'px';
+                    // Posisi awal bawah yang lebih rendah (diturunkan)
+                    lowerBead.style.top = `${40 + j * 12}%`; // Semua beads bawah diturunkan
+                    lowerBead.dataset.value = 1;
+                    lowerBead.dataset.position = 'lower';
+                    lowerBead.dataset.rod = i;
+                    lowerBead.dataset.index = j;
+                    lowerBead.dataset.moved = 'false';
+                    
+                    sempoaContainer.appendChild(lowerBead);
+                }
+                
+                sempoaContainer.appendChild(upperBead);
+                
+                // Tambahkan nilai untuk tiang
+                const rodValue = document.createElement('div');
+                rodValue.className = 'rod-value';
+                rodValue.id = `rod-value-${i}`;
+                rodValue.textContent = '0';
+                rodValuesContainer.appendChild(rodValue);
+            }
+            
+            // Tambahkan event listener untuk manik-manik
+            const beads = document.querySelectorAll('.bead');
+            beads.forEach(bead => {
+                bead.addEventListener('click', function() {
+                    moveBead(this);
+                    updateRodValues();
+                });
+            });
+            
+            // Fungsi untuk menggerakkan manik-manik
+            function moveBead(bead) {
+                const position = bead.dataset.position;
+                const rod = bead.dataset.rod;
+                const index = parseInt(bead.dataset.index);
+                
+                if (position === 'upper') {
+                    // Untuk manik atas
+                    if (bead.dataset.moved === 'false') {
+                        bead.style.top = '28%'; // Turun ke garis pembatas (dari 25% ke 28%)
+                        bead.dataset.moved = 'true';
+                    } else {
+                        bead.style.top = '18%'; // Kembali ke posisi semula
+                        bead.dataset.moved = 'false';
+                    }
+                } else {
+                    // Untuk manik bawah
+                    if (bead.dataset.moved === 'false') {
+                        // Naik 12% untuk semua manik
+                        const currentTop = parseInt(bead.style.top);
+                        bead.style.top = `${currentTop - 12}%`;
+                        bead.dataset.moved = 'true';
+                    } else {
+                        // Kembali ke posisi semula
+                        bead.style.top = `${40 + index * 12}%`;
+                        bead.dataset.moved = 'false';
+                    }
+                }
+            }
+            
+            // Fungsi untuk memperbarui nilai setiap tiang
+            function updateRodValues() {
+                // Reset semua nilai
+                for (let i = 0; i < rodCount; i++) {
+                    rodValues[i] = 0;
+                }
+                
+                // Hitung nilai untuk setiap tiang
+                const beads = document.querySelectorAll('.bead');
+                beads.forEach(bead => {
+                    const rod = parseInt(bead.dataset.rod);
+                    const value = parseInt(bead.dataset.value);
+                    const isMoved = bead.dataset.moved === 'true';
+                    
+                    if (isMoved) {
+                        rodValues[rod] += value;
+                    }
+                });
+                
+                // Perbarui tampilan nilai
+                for (let i = 0; i < rodCount; i++) {
+                    document.getElementById(`rod-value-${i}`).textContent = rodValues[i];
+                }
+            }
+            
+            // Fungsi untuk reset sempoa
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                const beads = document.querySelectorAll('.bead');
+                beads.forEach(bead => {
+                    const position = bead.dataset.position;
+                    const index = parseInt(bead.dataset.index || '0');
+                    
+                    if (position === 'upper') {
+                        bead.style.top = '18%';
+                        bead.dataset.moved = 'false';
+                    } else {
+                        bead.style.top = `${40 + index * 12}%`;
+                        bead.dataset.moved = 'false';
+                    }
+                });
+                
+                updateRodValues();
+                showNotification('Sempoa telah direset!');
+            });
+            
+            // Fungsi untuk download sempoa sebagai gambar
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                // Buat container khusus untuk download
+                const downloadContainer = document.createElement('div');
+                downloadContainer.style.position = 'absolute';
+                downloadContainer.style.left = '-9999px';
+                document.body.appendChild(downloadContainer);
+                
+                // Buat elemen sempoa dan nilai untuk di-download
+                const sempoaClone = document.getElementById('sempoa').cloneNode(true);
+                const valuesClone = document.getElementById('rodValues').cloneNode(true);
+                
+                // Atur style untuk container download
+                downloadContainer.style.backgroundColor = '#f5e9d7';
+                downloadContainer.style.padding = '20px';
+                downloadContainer.style.borderRadius = '10px';
+                
+                downloadContainer.appendChild(sempoaClone);
+                downloadContainer.appendChild(valuesClone);
+                
+                // Menggunakan html2canvas untuk mengkonversi menjadi gambar
+                if (typeof html2canvas !== 'undefined') {
+                    html2canvas(downloadContainer, {
+                        backgroundColor: '#f5e9d7',
+                        scale: 2 // Kualitas lebih tinggi
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = 'sempoa-mini-ebook.png';
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                        
+                        // Hapus container setelah selesai
+                        document.body.removeChild(downloadContainer);
+                        
+                        // Tampilkan notifikasi
+                        showNotification('Gambar sempoa berhasil didownload!');
+                    });
+                } else {
+                    alert('Fitur download memerlukan library html2canvas. Silakan gunakan versi online untuk fitur ini.');
+                }
+            });
+            
+            // Fungsi untuk menampilkan notifikasi
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.style.opacity = 1;
+                
+                setTimeout(function() {
+                    notification.style.opacity = 0;
+                }, 3000);
+            }
+        });
+    </script>
+    
+    <!-- Memuat library html2canvas dari CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
