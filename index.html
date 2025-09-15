@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sempoa Sederhana</title>
+    <title>Sempoa Sederhana dengan Ikon Panah</title>
     <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #ffffff; /* Latar belakang putih bersih */
+            background: linear-gradient(135deg, #f9f5f0 0%, #e6d2b5 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
             color: #5c3317;
@@ -23,17 +23,21 @@
             flex-direction: column;
             align-items: center;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
             max-width: 500px;
             width: 100%;
         }
         
         .title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #5c3317;
             font-family: 'Georgia', serif;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
         .sempoa-frame {
@@ -45,7 +49,7 @@
             border-radius: 8px;
             box-shadow: 
                 inset 0 0 10px rgba(139, 69, 19, 0.3),
-                0 4px 8px rgba(0, 0, 0, 0.2);
+                0 6px 12px rgba(0, 0, 0, 0.25);
             margin: 15px 0;
             overflow: hidden;
         }
@@ -106,48 +110,49 @@
             display: flex;
             justify-content: space-around;
             width: 400px;
-            margin-top: 15px;
+            margin-top: 5px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 32px;
             color: #5c3317;
             text-align: center;
+            padding: 5px;
+            font-family: 'Georgia', serif;
         }
         
         .rod-value {
             width: 70px;
-            padding: 5px;
-            background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
-            border-radius: 5px;
-            border: 1px solid #8b5a2b;
-            font-family: 'Georgia', serif;
+            padding: 3px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
         }
         
         .instruction {
             margin-top: 20px;
             text-align: center;
-            font-size: 14px;
+            font-size: 15px;
             color: #5c3317;
             max-width: 400px;
+            line-height: 1.5;
         }
         
         .reset-btn {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
             color: #5c3317;
             border: 2px solid #8b5a2b;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
             font-family: 'Georgia', serif;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
         }
         
         .reset-btn:hover {
             background: linear-gradient(to bottom, #f0e2ca, #d9b382);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(139, 69, 19, 0.3);
         }
         
         .notification {
@@ -157,25 +162,153 @@
             transform: translateX(-50%);
             background: linear-gradient(to right, #8b5a2b, #a67c52, #8b5a2b);
             color: #f8f0e0;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 15px;
             font-family: 'Georgia', serif;
+        }
+        
+        .hand-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .hand-btn {
+            padding: 10px 18px;
+            background: linear-gradient(to bottom, #e6d2b5, #c19a6b);
+            color: #5c3317;
+            border: 2px solid #8b5a2b;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(139, 69, 19, 0.2);
+        }
+        
+        .hand-btn:hover {
+            background: linear-gradient(to bottom, #f0e2ca, #d9b382);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+        }
+        
+        .arrow-icon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: move;
+            z-index: 10;
+            display: none;
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: rotate(-15deg);
+            transform-origin: center;
+        }
+        
+        .arrow-icon:hover {
+            transform: rotate(-15deg) scale(1.05);
+        }
+        
+        .thumb-arrow {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,70 Q50,30 70,70" fill="none" stroke="%238b5a2b" stroke-width="4" stroke-linecap="round"/><path d="M65,55 L70,70 L55,60" fill="%238b5a2b"/><circle cx="50" cy="50" r="10" fill="%23d9b382" stroke="%238b5a2b" stroke-width="2"/><text x="50" y="54" text-anchor="middle" fill="%235c3317" font-size="12" font-weight="bold">B+A</text></svg>');
+        }
+        
+        .index-arrow {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,30 Q50,70 70,30" fill="none" stroke="%238b5a2b" stroke-width="4" stroke-linecap="round"/><path d="M35,45 L30,30 L45,40" fill="%238b5a2b"/><circle cx="50" cy="50" r="10" fill="%23d9b382" stroke="%238b5a2b" stroke-width="2"/><text x="50" y="54" text-anchor="middle" fill="%235c3317" font-size="12" font-weight="bold">A+B</text></svg>');
+            transform: rotate(15deg);
+        }
+        
+        .index-arrow:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+        
+        .pinch-arrow {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,70 Q50,40 70,70" fill="none" stroke="%238b5a2b" stroke-width="4" stroke-linecap="round"/><path d="M30,30 Q50,60 70,30" fill="none" stroke="%238b5a2b" stroke-width="4" stroke-linecap="round"/><path d="M65,55 L70,70 L55,60" fill="%238b5a2b"/><path d="M35,45 L30,30 L45,40" fill="%238b5a2b"/><circle cx="50" cy="50" r="10" fill="%23d9b382" stroke="%238b5a2b" stroke-width="2"/><text x="50" y="54" text-anchor="middle" fill="%235c3317" font-size="10" font-weight="bold">A+B</text></svg>');
+            width: 80px;
+            height: 80px;
+            transform: rotate(0deg);
+        }
+        
+        .pinch-arrow:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+        }
+        
+        .control-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #5c3317;
+            text-align: center;
+        }
+        
+        .control-btn {
+            padding: 8px 12px;
+            background: linear-gradient(to bottom, #d9b382, #b08d57);
+            color: #5c3317;
+            border: 1px solid #8b5a2b;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        
+        .control-btn:hover {
+            background: linear-gradient(to bottom, #e6c9a0, #c19a6b);
+        }
+        
+        .size-display {
+            text-align: center;
+            font-size: 11px;
+            color: #5c3317;
+            margin-top: 3px;
         }
     </style>
 </head>
 <body>
     <div class="sempoa-container">
-        <div class="title">Sempoa Sederhana</div>
+        <div class="title">Sempoa Sederhana dengan Ikon Panah</div>
         
         <div class="sempoa-frame" id="sempoa">
             <!-- Pembatas horizontal di tengah -->
             <div class="horizontal-divider"></div>
+            
+            <!-- Ikon panah yang dapat digerakkan -->
+            <div class="arrow-icon thumb-arrow" id="thumbArrow"></div>
+            <div class="arrow-icon index-arrow" id="indexArrow"></div>
+            <div class="arrow-icon pinch-arrow" id="pinchArrow"></div>
             
             <!-- Tiang vertikal akan ditambahkan melalui JavaScript -->
         </div>
@@ -184,10 +317,38 @@
             <!-- Nilai untuk setiap tiang akan ditambahkan melalui JavaScript -->
         </div>
         
+        <div class="hand-controls">
+            <button class="hand-btn" id="showThumbBtn">Panah Bawah ke Atas</button>
+            <button class="hand-btn" id="showIndexBtn">Panah Atas ke Bawah</button>
+            <button class="hand-btn" id="showPinchBtn">Panah Cubit Bersamaan</button>
+            <button class="hand-btn" id="hideArrowsBtn">Sembunyikan Panah</button>
+        </div>
+        
+        <div class="control-panel">
+            <div class="control-row">
+                <div class="control-group">
+                    <div class="control-label">Putar Ikon</div>
+                    <div class="control-row">
+                        <button class="control-btn" id="rotateLeftBtn">↺ Kiri</button>
+                        <button class="control-btn" id="rotateRightBtn">↻ Kanan</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">Ukuran Ikon</div>
+                    <div class="control-row">
+                        <button class="control-btn" id="sizeDownBtn">− Kecil</button>
+                        <button class="control-btn" id="sizeUpBtn">+ Besar</button>
+                    </div>
+                    <div class="size-display" id="sizeDisplay">Ukuran: 100%</div>
+                </div>
+            </div>
+        </div>
+        
         <button class="reset-btn" id="resetBtn">Reset Sempoa</button>
         
         <div class="instruction">
-            Klik pada manik-manik untuk menggerakkannya. Manik atas bernilai 5, manik bawah bernilai 1.
+            Klik pada manik-manik untuk menggerakkannya. Manik atas (A) bernilai 5, manik bawah (B) bernilai 1.
+            Gunakan ikon panah untuk simulasi interaksi dengan sempoa. Klik tombol putar untuk memutar ikon.
         </div>
     </div>
 
@@ -199,8 +360,24 @@
             const rodValuesContainer = document.getElementById('rodValues');
             const resetBtn = document.getElementById('resetBtn');
             const notification = document.getElementById('notification');
+            const thumbArrow = document.getElementById('thumbArrow');
+            const indexArrow = document.getElementById('indexArrow');
+            const pinchArrow = document.getElementById('pinchArrow');
+            const showThumbBtn = document.getElementById('showThumbBtn');
+            const showIndexBtn = document.getElementById('showIndexBtn');
+            const showPinchBtn = document.getElementById('showPinchBtn');
+            const hideArrowsBtn = document.getElementById('hideArrowsBtn');
+            const rotateLeftBtn = document.getElementById('rotateLeftBtn');
+            const rotateRightBtn = document.getElementById('rotateRightBtn');
+            const sizeDownBtn = document.getElementById('sizeDownBtn');
+            const sizeUpBtn = document.getElementById('sizeUpBtn');
+            const sizeDisplay = document.getElementById('sizeDisplay');
+            
             const rodCount = 5; // Jumlah batang pada sempoa
             const rodValues = [0, 0, 0, 0, 0]; // Nilai awal untuk setiap tiang
+            let currentArrow = null;
+            let rotationAngle = 0;
+            let currentSize = 100; // Ukuran default 100%
             
             // Buat tiang vertikal dan manik-manik untuk setiap batang
             for (let i = 0; i < rodCount; i++) {
@@ -239,7 +416,7 @@
                 
                 sempoaContainer.appendChild(upperBead);
                 
-                // Tambahkan nilai untuk tiang
+                // Tambahkan nilai untuk tiang (tanpa border dan background)
                 const rodValue = document.createElement('div');
                 rodValue.className = 'rod-value';
                 rodValue.id = `rod-value-${i}`;
@@ -340,6 +517,181 @@
                     notification.style.opacity = 0;
                 }, 2000);
             }
+            
+            // Fungsi untuk menggerakkan ikon panah
+            function makeDraggable(element) {
+                let isDragging = false;
+                let offset = [0, 0];
+                
+                element.addEventListener('mousedown', function(e) {
+                    isDragging = true;
+                    offset = [
+                        element.offsetLeft - e.clientX,
+                        element.offsetTop - e.clientY
+                    ];
+                    element.style.zIndex = 1000;
+                    currentArrow = element;
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    e.preventDefault();
+                    if (isDragging) {
+                        element.style.left = (e.clientX + offset[0]) + 'px';
+                        element.style.top = (e.clientY + offset[1]) + 'px';
+                    }
+                });
+                
+                document.addEventListener('mouseup', function() {
+                    isDragging = false;
+                    element.style.zIndex = 10;
+                });
+                
+                // Untuk perangkat touch
+                element.addEventListener('touchstart', function(e) {
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    offset = [
+                        element.offsetLeft - touch.clientX,
+                        element.offsetTop - touch.clientY
+                    ];
+                    element.style.zIndex = 1000;
+                    currentArrow = element;
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('touchmove', function(e) {
+                    if (isDragging) {
+                        const touch = e.touches[0];
+                        element.style.left = (touch.clientX + offset[0]) + 'px';
+                        element.style.top = (touch.clientY + offset[1]) + 'px';
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('touchend', function() {
+                    isDragging = false;
+                    element.style.zIndex = 10;
+                });
+            }
+            
+            // Fungsi untuk memutar ikon
+            function rotateArrow(direction) {
+                if (!currentArrow) {
+                    showNotification('Pilih ikon panah terlebih dahulu!');
+                    return;
+                }
+                
+                rotationAngle += direction * 15; // Putar 15 derajat per klik
+                currentArrow.style.transform = `rotate(${rotationAngle}deg) scale(${currentSize/100})`;
+            }
+            
+            // Fungsi untuk mengubah ukuran ikon
+            function resizeArrow(direction) {
+                if (!currentArrow) {
+                    showNotification('Pilih ikon panah terlebih dahulu!');
+                    return;
+                }
+                
+                // Ubah ukuran (min 50%, max 150%)
+                currentSize = Math.max(50, Math.min(150, currentSize + direction * 10));
+                
+                // Terapkan ukuran baru
+                if (currentArrow.id === 'thumbArrow') {
+                    currentArrow.style.width = `${70 * currentSize/100}px`;
+                    currentArrow.style.height = `${70 * currentSize/100}px`;
+                } else if (currentArrow.id === 'indexArrow') {
+                    currentArrow.style.width = `${70 * currentSize/100}px`;
+                    currentArrow.style.height = `${70 * currentSize/100}px`;
+                } else if (currentArrow.id === 'pinchArrow') {
+                    currentArrow.style.width = `${80 * currentSize/100}px`;
+                    currentArrow.style.height = `${80 * currentSize/100}px`;
+                }
+                
+                // Pertahankan rotasi saat ini
+                currentArrow.style.transform = `rotate(${rotationAngle}deg) scale(${currentSize/100})`;
+                
+                // Perbarui tampilan ukuran
+                sizeDisplay.textContent = `Ukuran: ${currentSize}%`;
+            }
+            
+            // Membuat ikon panah dapat digerakkan
+            makeDraggable(thumbArrow);
+            makeDraggable(indexArrow);
+            makeDraggable(pinchArrow);
+            
+            // Event listener untuk tombol putar
+            rotateLeftBtn.addEventListener('click', function() {
+                rotateArrow(-1); // Putar kiri
+            });
+            
+            rotateRightBtn.addEventListener('click', function() {
+                rotateArrow(1); // Putar kanan
+            });
+            
+            // Event listener untuk tombol ubah ukuran
+            sizeDownBtn.addEventListener('click', function() {
+                resizeArrow(-1); // Perkecil
+            });
+            
+            sizeUpBtn.addEventListener('click', function() {
+                resizeArrow(1); // Perbesar
+            });
+            
+            // Menampilkan ikon panah bawah ke atas
+            showThumbBtn.addEventListener('click', function() {
+                thumbArrow.style.display = 'block';
+                thumbArrow.style.left = '50px';
+                thumbArrow.style.top = '80px';
+                indexArrow.style.display = 'none';
+                pinchArrow.style.display = 'none';
+                currentArrow = thumbArrow;
+                rotationAngle = -15;
+                currentSize = 100;
+                thumbArrow.style.width = '70px';
+                thumbArrow.style.height = '70px';
+                thumbArrow.style.transform = `rotate(${rotationAngle}deg)`;
+                sizeDisplay.textContent = 'Ukuran: 100%';
+            });
+            
+            // Menampilkan ikon panah atas ke bawah
+            showIndexBtn.addEventListener('click', function() {
+                indexArrow.style.display = 'block';
+                indexArrow.style.left = '300px';
+                indexArrow.style.top = '80px';
+                thumbArrow.style.display = 'none';
+                pinchArrow.style.display = 'none';
+                currentArrow = indexArrow;
+                rotationAngle = 15;
+                currentSize = 100;
+                indexArrow.style.width = '70px';
+                indexArrow.style.height = '70px';
+                indexArrow.style.transform = `rotate(${rotationAngle}deg)`;
+                sizeDisplay.textContent = 'Ukuran: 100%';
+            });
+            
+            // Menampilkan ikon panah cubitan
+            showPinchBtn.addEventListener('click', function() {
+                pinchArrow.style.display = 'block';
+                pinchArrow.style.left = '180px';
+                pinchArrow.style.top = '80px';
+                thumbArrow.style.display = 'none';
+                indexArrow.style.display = 'none';
+                currentArrow = pinchArrow;
+                rotationAngle = 0;
+                currentSize = 100;
+                pinchArrow.style.width = '80px';
+                pinchArrow.style.height = '80px';
+                pinchArrow.style.transform = `rotate(${rotationAngle}deg)`;
+                sizeDisplay.textContent = 'Ukuran: 100%';
+            });
+            
+            // Menyembunyikan semua ikon panah
+            hideArrowsBtn.addEventListener('click', function() {
+                thumbArrow.style.display = 'none';
+                indexArrow.style.display = 'none';
+                pinchArrow.style.display = 'none';
+                currentArrow = null;
+            });
         });
     </script>
 </body>
